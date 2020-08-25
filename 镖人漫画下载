@@ -1,0 +1,37 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+from urllib.request import urlopen
+from contextlib import closing
+
+download_head={
+    'Referer':'https://www.dmzj.com/info/biaoren.html'
+}
+def down(href):
+    ress=requests.get(href)
+    soups=BeautifulSoup(ress.text,'html.parser')
+    soups=soups.script
+    hou = re.findall('\d{13,14}', str(soups))[0]
+    qian = re.findall('\|(\d{5})\|', str(soups))[0]
+    if
+    link = 'https://images.dmzj.com/img/chapterpic/3126' + '/' + qian + '/' + hou + '.jpg'
+
+
+
+url='https://www.dmzj.com/info/biaoren.html'
+re=requests.get(url)
+re.encoding='UTF-8'
+soup=BeautifulSoup(re.text,'html.parser')
+#print(soup)
+product1=soup.find('ul',class_="list_con_li")
+#print(product1)
+product2=product1.find_all('a')
+'''for i in product2:
+    print(i)'''
+#print(product2)
+for i in product2:
+    href=[]
+    name=[]
+    href=i.get('href')
+    name='镖人'+i.text
+    #print(href,name)
